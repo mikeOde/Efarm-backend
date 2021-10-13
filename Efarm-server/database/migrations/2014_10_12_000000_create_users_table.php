@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('first_name');
             $table->string('last_name');
             $table->tinyInteger('user_type_id'); // 0 FOR CUSTOMERS AND 1 FOR FARMERS
@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('user_types', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->integer('user_id');
             $table->string('name');
             $table->timestamps();
@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('addresses', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->integer('user_id');
             $table->string('mobile_number');
             $table->string('city');
@@ -45,7 +45,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('orders', function (Blueprint $table) {  // users order boxes that they already customized or customized by the farmers
-            $table->uuid('id');
+            $table->id();
             $table->integer('user_id');
             $table->integer('farm_id');
             $table->integer('box_id');
@@ -56,21 +56,21 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('trees_adoptions', function (Blueprint $table) {  
-            $table->uuid('id');
+            $table->id();
             $table->integer('user_id');
             $table->integer('tree_id');
             $table->timestamps();
         });
 
         Schema::create('sections_adoptions', function (Blueprint $table) {  
-            $table->uuid('id');
+            $table->id();
             $table->integer('user_id');
             $table->integer('section_id');
             $table->timestamps();
         });
 
         Schema::create('user_notifications', function (Blueprint $table) {  
-            $table->uuid('id');
+            $table->id();
             $table->integer('user_id');
             $table->string('body');
             $table->boolean('is_read');

@@ -14,10 +14,10 @@ class CreateFarmsTable extends Migration
     public function up()
     {
         Schema::create('farms', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('owner_id');
+            $table->string('owner_name');
             $table->integer('address_id');
             $table->integer('farm_has_badges');  // ??How to implement the many to many rel???
             $table->integer('review_id');        //??
@@ -27,7 +27,7 @@ class CreateFarmsTable extends Migration
         });
 
         Schema::create('vegetables', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->integer('owner_id');
@@ -39,7 +39,7 @@ class CreateFarmsTable extends Migration
         });
 
         Schema::create('boxes', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->integer('owner_id');
@@ -53,7 +53,7 @@ class CreateFarmsTable extends Migration
         });
 
         Schema::create('trees', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->integer('owner_id');
@@ -65,7 +65,7 @@ class CreateFarmsTable extends Migration
         });
 
         Schema::create('sections', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->string('description');
             $table->integer('owner_id');
@@ -77,7 +77,7 @@ class CreateFarmsTable extends Migration
         });
 
         Schema::create('badges', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->id();
             $table->string('name');
             $table->integer('farm_id');
             $table->timestamps();
