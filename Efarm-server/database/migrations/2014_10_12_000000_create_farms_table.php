@@ -17,11 +17,13 @@ class CreateFarmsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('owner_name');
-            $table->integer('address_id');
-            $table->integer('farm_has_badges');  // ??How to implement the many to many rel???
-            $table->integer('review_id');        //??
-            $table->string('image');
+            $table->integer('owner_id');
+            $table->string('owner_first_name');
+            $table->string('owner_last_name');
+            $table->integer('address_id')->nullable();
+            $table->integer('farm_has_badges')->nullable();  // ??How to implement the many to many rel???
+            $table->integer('review_id')->nullable();        //??
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

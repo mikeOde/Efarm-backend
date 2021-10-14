@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Models\UserConnection;
-use App\Models\UserHobby;
 use Auth;
 
 class AuthController extends Controller
@@ -60,7 +59,6 @@ class AuthController extends Controller
             $validator->validated(),
             ['password' => bcrypt($request->password),
             'user_type_id' => $request->user_type_id] //user_type_id is 0 when sent from the app, and 1 when sent from the web
-
         ));
 
         return response()->json([
@@ -121,5 +119,6 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+        
     }
 }

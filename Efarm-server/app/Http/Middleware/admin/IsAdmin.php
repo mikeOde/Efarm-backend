@@ -20,6 +20,6 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect(route('api:test'))->with('error','You do not have admin access');
+        return redirect(route('api:login'))->with('error','You do not have admin access');
     }
 }
