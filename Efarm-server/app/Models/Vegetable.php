@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Farm extends Model
+class Vegetable extends Model
 {
-	protected $table = "farms";
+	protected $table = "vegetables";
 
 	protected $fillable = [
         'name', 
         'description',
         'owner_id',
-        'address_id',
-        'farm_has_badges',
-        'review_id',
+        'quantity',
+        'price',
         'image',
     ];
 }

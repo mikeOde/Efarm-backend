@@ -4,17 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Farm extends Model
+class Box extends Model
 {
-	protected $table = "farms";
+	protected $table = "boxes";
 
 	protected $fillable = [
         'name', 
         'description',
         'owner_id',
-        'address_id',
-        'farm_has_badges',
-        'review_id',
-        'image',
+        'quantity',       // quantity of boxes available
+        'price',          // per box 
     ];
 }

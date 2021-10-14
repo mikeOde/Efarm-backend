@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\FarmerController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,9 +26,15 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
 	Route::group(['middleware' => 'admin'], function () {
         Route::post('/edit_profiles', [FarmerController::class, 'editProfile'])->name('api:edit_profile');
-        
-		
+        Route::post('/add_vegetables', [FarmerController::class, 'addVegetables'])->name('api:add_vegetables');
+		Route::post('/delete_vegetable', [FarmerController::class, 'deleteVegetable'])->name('api:delete_vegetable');
+        Route::post('/add_trees', [FarmerController::class, 'addTrees'])->name('api:add_trees');
+        Route::post('/delete_tree', [FarmerController::class, 'deleteTree'])->name('api:delete_tree');
+        Route::get('/get_vegetables', [FarmerController::class, 'getVegetables'])->name('api:get_vegetables');
+        Route::get('/get_trees', [FarmerController::class, 'getTrees'])->name('api:get_trees');
+        Route::post('/create_box', [FarmerController::class, 'createBox'])->name('api:create_box');
+        Route::post('/add_items', [FarmerController::class, 'addItems'])->name('api:add_items');
 	});
     Route::get('/user_profile', [AuthController::class, 'userProfile'])->name('api:user_profile');
-	Route::get('/get_trees', [UserController::class, 'getTrees'])->name('api:get_trees');
+	
 });

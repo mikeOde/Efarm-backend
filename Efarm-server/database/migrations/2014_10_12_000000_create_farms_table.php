@@ -18,8 +18,6 @@ class CreateFarmsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('owner_id');
-            $table->string('owner_first_name');
-            $table->string('owner_last_name');
             $table->integer('address_id')->nullable();
             $table->integer('farm_has_badges')->nullable();  // ??How to implement the many to many rel???
             $table->integer('review_id')->nullable();        //??
@@ -35,7 +33,7 @@ class CreateFarmsTable extends Migration
             $table->integer('owner_id');
             $table->integer('quantity');
             $table->integer('price');          // per Kg   
-            $table->string('image'); 
+            $table->string('image')->nullable(); 
             $table->timestamps();
             $table->softDeletes();
         });
@@ -44,12 +42,18 @@ class CreateFarmsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('owner_id');
-            $table->integer('veggetable_id');  // ??
-            $table->integer('veggetable_qtt'); // quantity of each veggetable in the box (Kg)
+            $table->integer('owner_id'); 
             $table->integer('quantity');       // quantity of boxes available
-            $table->integer('price');          // per box  
-            $table->string('image');   
+            $table->integer('price');          // per box   
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('boxes_items', function (Blueprint $table) {
+            $table->id();
+            $table->string('box_id');
+            $table->string('vegetable_id');
+            $table->integer('weight');       // weight of each vegetable included      
             $table->timestamps();
             $table->softDeletes();
         });
@@ -61,7 +65,7 @@ class CreateFarmsTable extends Migration
             $table->integer('owner_id');
             $table->integer('quantity');  // number of trees
             $table->integer('price');     // price to adopt one tree
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
