@@ -16,4 +16,9 @@ class Tree extends Model
         'price',
         'image',
     ];
+
+    public function user()
+        {
+		    return $this->belongsTo(User::class);
+	    }
 }

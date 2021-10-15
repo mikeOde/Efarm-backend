@@ -47,7 +47,7 @@ class CreateUsersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {  // users order boxes that they already customized or customized by the farmers
             $table->id();
             $table->integer('user_id');
-            $table->integer('farm_id');
+            $table->integer('owner_id');
             $table->integer('box_id');
             $table->integer('customer_address_id'); 
             $table->integer('quantity');    //in boxes

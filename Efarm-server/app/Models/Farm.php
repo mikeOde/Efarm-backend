@@ -17,4 +17,9 @@ class Farm extends Model
         'review_id',
         'image',
     ];
+
+    public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
 }

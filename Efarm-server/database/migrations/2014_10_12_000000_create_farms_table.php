@@ -19,8 +19,8 @@ class CreateFarmsTable extends Migration
             $table->string('description');
             $table->integer('owner_id');
             $table->integer('address_id')->nullable();
-            $table->integer('farm_has_badges')->nullable();  // ??How to implement the many to many rel???
-            $table->integer('review_id')->nullable();        //??
+            $table->integer('farm_has_badges')->nullable();  // Might remove it
+            $table->integer('review_id')->nullable();        
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -43,6 +43,7 @@ class CreateFarmsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('owner_id'); 
+            $table->integer('created_by_user_id')->nullable();   //It will hold the id of the user who customizes a box
             $table->integer('quantity');       // quantity of boxes available
             $table->integer('price');          // per box   
             $table->timestamps();

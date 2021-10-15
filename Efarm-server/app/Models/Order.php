@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Box extends Model
+class Order extends Model
 {
-	protected $table = "boxes";
+	protected $table = "orders";
 
 	protected $fillable = [
-        'name', 
-        'description',
-        'owner_id',
-        'created_by_user_id',
+        'user_id', 
+        'owner_id',     
+        'box_id',
+        'customer_address_id',
         'quantity',       // quantity of boxes available
         'price',          // per box 
     ];
@@ -21,8 +21,4 @@ class Box extends Model
         {
 		    return $this->belongsTo(User::class);
 	    }
-    public function boxitem()
-        {
-            return $this->hasMany(BoxItem::class);
-        }
 }

@@ -13,4 +13,9 @@ class BoxItem extends Model
         'vegetable_id',
         'weight'
     ];
+
+    public function box()
+        {
+		    return $this->belongsTo(Box::class);
+	    }
 }

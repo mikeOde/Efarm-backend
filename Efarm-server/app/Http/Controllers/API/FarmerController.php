@@ -172,9 +172,7 @@ class FarmerController extends Controller
 		}
 
 		$create_box = Box::create(array_merge(
-			$validator->validated(),
-			['owner_id' => $owner_id]
-		));
+			$validator->validated(),['owner_id' => $owner_id,]));
 
 		return response()->json([
 			'status' => true,
