@@ -24,7 +24,8 @@ Route::post('/refresh', [AuthController::class, 'refresh'])->name('api:refresh')
 Route::group(['middleware' => 'auth.jwt'], function () {
 
 	Route::group(['middleware' => 'admin'], function () {
-        Route::post('/edit_profiles', [FarmerController::class, 'editProfile'])->name('api:edit_profile');
+        Route::get('/profile', [FarmerController::class, 'getProfile'])->name('api:profile');
+        Route::post('/edit_profile', [FarmerController::class, 'editProfile'])->name('api:edit_profile');
         Route::post('/add_vegetables', [FarmerController::class, 'addVegetables'])->name('api:add_vegetables');
 		Route::post('/delete_vegetable', [FarmerController::class, 'deleteVegetable'])->name('api:delete_vegetable');
         Route::post('/add_trees', [FarmerController::class, 'addTrees'])->name('api:add_trees');

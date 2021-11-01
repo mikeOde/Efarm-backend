@@ -15,12 +15,10 @@ class CreateFarmsTable extends Migration
     {
         Schema::create('farms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->integer('owner_id');
-            $table->integer('address_id')->nullable();
-            $table->integer('farm_has_badges')->nullable();  // Might remove it
-            $table->integer('review_id')->nullable();        
+            $table->string('location')->nullable();       
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -38,27 +36,6 @@ class CreateFarmsTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('boxes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->integer('owner_id'); 
-            $table->integer('created_by_user_id')->nullable();   //It will hold the id of the user who customizes a box
-            $table->integer('quantity');       // quantity of boxes available
-            $table->integer('price');          // per box   
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('boxes_items', function (Blueprint $table) {
-            $table->id();
-            $table->string('box_id');
-            $table->string('vegetable_id');
-            $table->integer('weight');       // weight of each vegetable included      
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         Schema::create('trees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -67,26 +44,6 @@ class CreateFarmsTable extends Migration
             $table->integer('quantity');  // number of trees
             $table->integer('price');     // price to adopt one tree
             $table->string('image')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('sections', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->integer('owner_id');
-            $table->integer('section_has_trees');  //?
-            $table->integer('area');  
-            $table->integer('price');              // Price to adopt the whole section   
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('badges', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('farm_id');
             $table->timestamps();
             $table->softDeletes();
         });

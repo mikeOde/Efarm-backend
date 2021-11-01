@@ -18,6 +18,20 @@ use Auth;
 
 class FarmerController extends Controller
 {
+	function getProfile() {
+		$user = Auth::user();
+		$owner_id = $user->id;
+		// $owner_first_name = $user->first_name;
+		// $owner_last_name = $user->last_name;
+		$owner_name = $user->first_name . ' ' . $user->last_name;
+
+		$farm_profile = Farm::where('owner_id', $owner_id)->get()->toArray();
+		$farm_profile_data = array_merge(
+			$farm_profile,
+			['owner_name' => $owner_name]
+		);
+		return json_encode($farm_profile_data);
+	}
 	// Needs to be rechecked once the frontend is to be implemented
 	function editProfile(Request $request) {
         $user = Auth::user();
@@ -28,6 +42,8 @@ class FarmerController extends Controller
 		$validator = Validator::make($request->all(), [
 			'name' => 'required|string|between:2,100',
 			'description' => 'string',
+			'location' => 'required|string|between:2,100',
+			'image' => 'required|string'
 		]);
 
 		if ($validator->fails()) {
@@ -64,7 +80,8 @@ class FarmerController extends Controller
 			'name' => 'required|string|between:2,100',
 			'description' => 'string',
 			'quantity' => 'required|integer',
-			'price' => 'required|integer'
+			'price' => 'required|integer',
+			'image' => 'string'
 		]);
 
 		if ($validator->fails()) {

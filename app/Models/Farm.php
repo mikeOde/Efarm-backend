@@ -12,9 +12,7 @@ class Farm extends Model
         'name', 
         'description',
         'owner_id',
-        'address_id',
-        'farm_has_badges',
-        'review_id',
+        'location',
         'image',
     ];
 

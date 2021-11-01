@@ -34,16 +34,6 @@ class CreateUsersTable extends Migration
             
         });
 
-        Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('mobile_number');
-            $table->string('city');
-            $table->string('street'); 
-            $table->string('building');
-            $table->timestamps();
-        });
-
         Schema::create('orders', function (Blueprint $table) {  // users order boxes that they already customized or customized by the farmers
             $table->id();
             $table->integer('user_id');
@@ -59,21 +49,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('tree_id');
-            $table->timestamps();
-        });
-
-        Schema::create('sections_adoptions', function (Blueprint $table) {  
-            $table->id();
-            $table->integer('user_id');
-            $table->integer('section_id');
-            $table->timestamps();
-        });
-
-        Schema::create('user_notifications', function (Blueprint $table) {  
-            $table->id();
-            $table->integer('user_id');
-            $table->string('body');
-            $table->boolean('is_read');
             $table->timestamps();
         });
 
