@@ -61,6 +61,11 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function farm()
+    {
+        return $this->hasOne(Farm::class, 'owner_id');
+    }
+
     public function vegetable()
         {
             return $this->hasMany(Vegetable::class);

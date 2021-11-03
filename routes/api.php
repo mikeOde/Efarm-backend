@@ -32,17 +32,11 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::post('/delete_tree', [FarmerController::class, 'deleteTree'])->name('api:delete_tree');
         Route::get('/get_vegetables', [FarmerController::class, 'getVegetables'])->name('api:get_vegetables');
         Route::get('/get_trees', [FarmerController::class, 'getTrees'])->name('api:get_trees');
-        Route::post('/create_box', [FarmerController::class, 'createBox'])->name('api:create_box');
-        Route::post('/add_items', [FarmerController::class, 'addItems'])->name('api:add_items');
 	});
 
-    Route::get('/user_profile', [AuthController::class, 'userProfile'])->name('api:user_profile');
+    Route::get('/user_get_farms', [UserController::class, 'userGetFarms'])->name('api:user_get_farms');
 	Route::post('/user_get_vegetables', [UserController::class, 'userGetVegetables'])->name('api:user_get_vegetables');
     Route::post('/user_get_trees', [UserController::class, 'userGetTrees'])->name('api:user_get_trees');
     Route::post('/user_adopt_trees', [UserController::class, 'userAdoptTrees'])->name('api:user_adopt_trees');
-    Route::post('/user_get_boxes', [UserController::class, 'userGetBoxes'])->name('api:user_get_boxes');
-    Route::post('/user_get_items', [UserController::class, 'userGetItems'])->name('api:user_get_items');
     Route::post('/user_order_boxes', [UserController::class, 'userOrderBoxes'])->name('api:user_order_boxes');
-    Route::post('/user_create_box', [UserController::class, 'userCreateBox'])->name('api:user_create_box');
-    Route::post('/user_add_items', [UserController::class, 'userAddItems'])->name('api:user_add_items');
 });
