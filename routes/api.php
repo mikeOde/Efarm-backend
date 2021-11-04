@@ -40,4 +40,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('/user_adopt_trees', [UserController::class, 'userAdoptTrees'])->name('api:user_adopt_trees');
     Route::get('/user_get_adoptions', [UserController::class, 'userGetAdoptions'])->name('api:user_get_adoptions');
     Route::post('/user_order_vegetables', [UserController::class, 'userOrderVegetables'])->name('api:user_order_vegetables');
+    Route::get('/user_get_orders', [UserController::class, 'userGetOrders'])->name('api:user_get_orders');
 });

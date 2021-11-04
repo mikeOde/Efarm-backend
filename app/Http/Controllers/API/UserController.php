@@ -85,4 +85,17 @@ class UserController extends Controller {
 			'message' => 'Vegetable was successfully ordered',
 		], 201);
     }
+
+	function userGetOrders() {
+		$user = Auth::user();
+		$user_id = $user->id;
+
+		$orders = DB::table('farms')
+			->join('vegetables', 'farms.owner_id', '=', 'vegetables.owner_id')
+			->join('vegetables_orders', 'vegetables.id', '=', 'vegetables_orders.vegetable_id')
+			->where('vegetables_orders.user_id', '=', $user_id)
+			->get()
+			->toArray();
+		return json_encode($orders);
+	}
 }
