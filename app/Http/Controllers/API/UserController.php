@@ -57,6 +57,19 @@ class UserController extends Controller {
 		], 201);
     }
 
+	function userGetAdoptions() {
+		$user = Auth::user();
+		$user_id = $user->id;
+
+		$adoptions = DB::table('farms')
+			->join('trees', 'farms.owner_id', '=', 'trees.owner_id')
+			->join('trees_adoptions', 'trees.id', '=', 'trees_adoptions.tree_id')
+			->where('trees_adoptions.user_id', '=', $user_id)
+			->get()
+			->toArray();
+		return json_encode($adoptions);
+	}
+
 	function userOrderVegetables(Request $request) {
         $user = Auth::user();
 		$user_id = $user->id;

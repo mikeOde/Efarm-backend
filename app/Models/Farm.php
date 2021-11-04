@@ -9,7 +9,7 @@ class Farm extends Model
 	protected $table = "farms";
 
 	protected $fillable = [
-        'name', 
+        'farm_name', 
         'description',
         'owner_id',
         'location',
