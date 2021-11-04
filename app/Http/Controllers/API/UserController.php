@@ -15,6 +15,7 @@ use App\Models\Tree;
 use App\Models\Box;
 use App\Models\BoxItem;
 use App\Models\TreeAdoption;
+use App\Models\VegetableOrder;
 use App\Models\Order;
 use App\Models\Farm;
 
@@ -53,6 +54,22 @@ class UserController extends Controller {
         return response()->json([
 			'status' => true,
 			'message' => 'Tree was successfully adopted',
+		], 201);
+    }
+
+	function userOrderVegetables(Request $request) {
+        $user = Auth::user();
+		$user_id = $user->id;
+        $vegetable_id = $request->vegetable_id;
+
+        $order_vegetable = VegetableOrder::create([
+            'user_id' => $user_id,
+            'vegetable_id' => $vegetable_id
+        ]);
+
+        return response()->json([
+			'status' => true,
+			'message' => 'Vegetable was successfully ordered',
 		], 201);
     }
 }

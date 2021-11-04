@@ -38,5 +38,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 	Route::post('/user_get_vegetables', [UserController::class, 'userGetVegetables'])->name('api:user_get_vegetables');
     Route::post('/user_get_trees', [UserController::class, 'userGetTrees'])->name('api:user_get_trees');
     Route::post('/user_adopt_trees', [UserController::class, 'userAdoptTrees'])->name('api:user_adopt_trees');
-    Route::post('/user_order_boxes', [UserController::class, 'userOrderBoxes'])->name('api:user_order_boxes');
+    Route::post('/user_order_vegetables', [UserController::class, 'userOrderVegetables'])->name('api:user_order_vegetables');
 });

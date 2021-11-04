@@ -52,6 +52,12 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('vegetables_orders', function (Blueprint $table) {  
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('vegetable_id');
+            $table->timestamps();
+        });
     }
 
     /**
