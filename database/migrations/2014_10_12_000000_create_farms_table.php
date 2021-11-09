@@ -20,6 +20,8 @@ class CreateFarmsTable extends Migration
             $table->integer('owner_id');
             $table->string('location')->nullable();       
             $table->string('image')->nullable();
+            $table->decimal('lat')->nullable();
+            $table->decimal('lng')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

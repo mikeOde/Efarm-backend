@@ -14,6 +14,8 @@ class Farm extends Model
         'owner_id',
         'location',
         'image',
+        'lat',
+        'lng'
     ];
 
     public function user()

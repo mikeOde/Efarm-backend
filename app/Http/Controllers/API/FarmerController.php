@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
@@ -41,7 +41,9 @@ class FarmerController extends Controller
 			'farm_name' => 'required|string|between:2,100',
 			'description' => 'string',
 			'location' => 'required|string|between:2,100',
-			'image' => 'required|string'
+			'image' => 'required|string',
+			'lat' => 'string',
+			'lng' => 'string'
 		]);
 
 		if ($validator->fails()) {
@@ -100,6 +102,29 @@ class FarmerController extends Controller
 		], 201);
 	}
 
+	function editVegetable(Request $request) {
+		$vegetable_id = $request->id;
+		$validator = Validator::make($request->all(), [
+			'name' => 'required|string|between:2,100',
+			'description' => 'string',
+			'quantity' => 'required|integer',
+			'price' => 'required|integer',
+		]);
+
+		if ($validator->fails()) {
+			return response()->json(array(
+				"status" => false,
+				"errors" => $validator->errors()
+			), 400);
+		}
+		$edit_vegetable = Vegetable::where('id', $vegetable_id)->update($validator->validated());
+
+		return response()->json([
+			'status' => true,
+			'message' => 'Vegetable was successfully edited',
+		], 201);
+	}
+
 	function deleteVegetable(Request $request) {
 		$user = Auth::user();
 		$owner_id = $user->id;
@@ -142,6 +167,29 @@ class FarmerController extends Controller
 		], 201);
 	}
 
+	function editTree(Request $request) {
+		$tree_id = $request->id;
+		$validator = Validator::make($request->all(), [
+			'name' => 'required|string|between:2,100',
+			'description' => 'string',
+			'quantity' => 'required|integer',
+			'price' => 'required|integer',
+		]);
+
+		if ($validator->fails()) {
+			return response()->json(array(
+				"status" => false,
+				"errors" => $validator->errors()
+			), 400);
+		}
+		$edit_tree = Tree::where('id', $tree_id)->update($validator->validated());
+
+		return response()->json([
+			'status' => true,
+			'message' => 'Vegetable was successfully edited',
+		], 201);
+	}
+
 	function deleteTree(Request $request) {
 		$user = Auth::user();
 		$owner_id = $user->id;
@@ -166,5 +214,39 @@ class FarmerController extends Controller
 		$owner_id = $user->id;
 		$trees = Tree::where('owner_id', $owner_id)->get()->toArray();
 		return json_encode($trees);
+	}
+
+	function getCustomers() {
+		$user = Auth::user();
+		$owner_id = $user->id;
+
+		$trees_ids = DB::table('trees')
+			->where('owner_id','=', $owner_id)
+			->pluck('id')
+			->all();
+
+		$trees_customers = DB::table('trees_adoptions')
+			->whereIn('tree_id', $trees_ids)
+			->pluck('user_id')
+			->all();
+		
+		$vegetables_ids = DB::table('vegetables')
+		->where('owner_id','=', $owner_id)
+		->pluck('id')
+		->all();
+
+		$vegetables_customers = DB::table('vegetables_orders')
+			->whereIn('vegetable_id', $vegetables_ids)
+			->pluck('user_id')
+			->all();
+		
+		$customers_ids = array_unique(array_merge($trees_customers,$vegetables_customers));
+
+		$customers_data = DB::table('users')
+			->whereIn('id', $customers_ids)
+			->get()
+			->toArray();
+
+		return json_encode($customers_data);
 	}
 }

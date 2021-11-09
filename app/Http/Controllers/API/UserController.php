@@ -29,6 +29,20 @@ class UserController extends Controller {
 		return json_encode($farms);
 	}
 
+	function getAllVegetables() {
+		$allVegetables = DB::table('farms')
+			->join('vegetables', 'farms.owner_id', '=', 'vegetables.owner_id')
+			->get()->toArray();
+		return json_encode($allVegetables);
+	}
+
+	function getAllTrees() {
+		$allTrees = DB::table('farms')
+			->join('trees', 'farms.owner_id', '=', 'trees.owner_id')
+			->get()->toArray();
+		return json_encode($allTrees);
+	}
+
     function userGetVegetables(Request $request) {
 		$owner_id = $request->owner_id;
 		$vegetables = Vegetable::where('owner_id', $owner_id)->get()->toArray();
