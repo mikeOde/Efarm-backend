@@ -35,6 +35,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
         Route::get('/get_vegetables', [FarmerController::class, 'getVegetables'])->name('api:get_vegetables');
         Route::get('/get_trees', [FarmerController::class, 'getTrees'])->name('api:get_trees');
         Route::get('/get_customers', [FarmerController::class, 'getCustomers'])->name('api:get_customers');
+        Route::get('/trees_chart', [FarmerController::class, 'treesChartData'])->name('api:trees_chart');
+        Route::get('/vegetables_chart', [FarmerController::class, 'vegetablesChartData'])->name('api:vegetables_chart');
+        Route::get('/total_adoptions', [FarmerController::class, 'totalAdoptionsData'])->name('api:total_adoptions');
+        Route::get('/total_orders', [FarmerController::class, 'totalOrdersData'])->name('api:total_orders');
 	});
 
     Route::get('/user_get_farms', [UserController::class, 'userGetFarms'])->name('api:user_get_farms');

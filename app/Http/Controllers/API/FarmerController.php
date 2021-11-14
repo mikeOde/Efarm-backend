@@ -29,8 +29,8 @@ class FarmerController extends Controller
 			['owner_name' => $owner_name]
 		);
 		return json_encode($farm_profile_data);
-	}
-	// Needs to be rechecked once the frontend is to be implemented
+	} 
+
 	function editProfile(Request $request) {
         $user = Auth::user();
 		$owner_id = $user->id;
@@ -248,5 +248,75 @@ class FarmerController extends Controller
 			->toArray();
 
 		return json_encode($customers_data);
+	}
+
+	function treesChartData() {
+		$user = Auth::user();
+		$owner_id = $user->id;
+
+		$trees_ids = DB::table('trees')
+			->where('owner_id','=', $owner_id)
+			->pluck('id')
+			->all();
+
+		$trees_adoptions = DB::table('trees_adoptions')
+			->join('trees', 'trees.id', '=', 'trees_adoptions.tree_id')
+			->select('trees.name', DB::raw('count(*) as total'))
+			->whereIn('tree_id', $trees_ids)
+			->groupBy('trees.name')
+			->get();
+		return json_encode($trees_adoptions);
+	}
+
+	function vegetablesChartData() {
+		$user = Auth::user();
+		$owner_id = $user->id;
+
+		$vegetables_ids = DB::table('vegetables')
+			->where('owner_id','=', $owner_id)
+			->pluck('id')
+			->all();
+
+		$vegetables_orders = DB::table('vegetables_orders')
+			->join('vegetables', 'vegetables.id', '=', 'vegetables_orders.vegetable_id')
+			->select('vegetables.name', DB::raw('count(*) as total'))
+			->whereIn('vegetable_id', $vegetables_ids)
+			->groupBy('vegetables.name')
+			->get();
+		return json_encode($vegetables_orders);
+	}
+
+	function totalAdoptionsData() {
+		$user = Auth::user();
+		$owner_id = $user->id;
+
+		$trees_ids = DB::table('trees')
+			->where('owner_id','=', $owner_id)
+			->pluck('id')
+			->all();
+
+		$trees_adoptions = DB::table('trees_adoptions')
+			->join('trees', 'trees.id', '=', 'trees_adoptions.tree_id')
+			->select('trees.price')
+			->whereIn('tree_id', $trees_ids)
+			->get();
+		return json_encode($trees_adoptions);
+	}
+
+	function totalOrdersData() {
+		$user = Auth::user();
+		$owner_id = $user->id;
+
+		$vegetables_ids = DB::table('vegetables')
+			->where('owner_id','=', $owner_id)
+			->pluck('id')
+			->all();
+
+		$vegetables_orders = DB::table('vegetables_orders')
+			->join('vegetables', 'vegetables.id', '=', 'vegetables_orders.vegetable_id')
+			->select('vegetables.price')
+			->whereIn('vegetable_id', $vegetables_ids)
+			->get();
+		return json_encode($vegetables_orders);
 	}
 }
